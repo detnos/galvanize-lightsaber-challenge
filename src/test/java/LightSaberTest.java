@@ -67,4 +67,60 @@ public class LightSaberTest {
         //assertion
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void remainingMinutesByDefaultIs300() {
+        //setup
+        LightSaber lightsaber = new LightSaber(1);
+        //execution
+
+        float expected = 300.0f;
+        float actual = lightsaber.getRemainingMinutes();
+
+        //assertion
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void usingLightSaberDrainsTheCharge() {
+        //setup
+        LightSaber lightsaber = new LightSaber(1);
+        //execution
+        lightsaber.use(100.0f);
+
+        float expected = 83.33333f;
+        float actual = lightsaber.getCharge();
+
+        //assertion
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void usingLightSaberDrainsTheAvailableMinutes() {
+        //setup
+        LightSaber lightsaber = new LightSaber(1);
+        //execution
+        lightsaber.use(100.0f);
+
+        float expected = 249.99998f;
+        float actual = lightsaber.getRemainingMinutes();
+
+        //assertion
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void canBeRecharged() {
+        //setup
+        LightSaber lightsaber = new LightSaber(1);
+        //execution
+        lightsaber.use(100.0f);
+        lightsaber.recharge();
+
+        float expected = 100.0f;
+        float actual = lightsaber.getCharge();
+
+        //assertion
+        assertEquals(expected, actual);
+    }
 }
